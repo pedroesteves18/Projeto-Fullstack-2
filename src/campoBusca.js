@@ -45,6 +45,10 @@ function CampoBusca(){
 
     const apertarBotao = async () => {
         try{
+            if(valorInput.trim() === ""){
+                novosResultados(undefined)
+                return
+            }
             const resposta = await fetch(`https://wft-geo-db.p.rapidapi.com/v1/geo/places?namePrefix=${valorInput}`, {
                 headers: {
                     "x-rapidapi-host": 'wft-geo-db.p.rapidapi.com',
@@ -52,7 +56,12 @@ function CampoBusca(){
                 }
             });
             const respostaJson = await resposta.json()
-            novosResultados(respostaJson)
+            console.log(respostaJson.data)
+            if((respostaJson.data).length === 0){
+                novosResultados(0)
+                return
+            }
+            novosResultados(respostaJson.data)
         }catch(error){
             console.log(`deu erro ${error.message}`)
         }

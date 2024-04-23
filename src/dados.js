@@ -4,7 +4,6 @@ import styled from 'styled-components'
 import CampoBusca from './campoBusca'
 
 
-
 const DadosStyled = styled.div`
     display: flex;
     align-items: center;

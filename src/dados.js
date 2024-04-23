@@ -1,8 +1,7 @@
 
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components'
 import CampoBusca from './campoBusca'
-import { ResultadoProvider } from './ResultadoContext';
 
 
 
@@ -21,7 +20,6 @@ function Dados() {
 
 
     return (
-        <ResultadoProvider>
             <DadosStyled>
                 <p>Busca de cidades e locais ao redor do mundo</p>
                 <br />
@@ -29,7 +27,6 @@ function Dados() {
                 <p>Insira a cidade ou local desejado</p>
                 <CampoBusca/>
             </DadosStyled>
-        </ResultadoProvider>
     )
 }
 

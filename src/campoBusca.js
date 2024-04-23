@@ -40,7 +40,7 @@ const LupaStyled = styled.img`
 function CampoBusca(){
 
     const [valorInput,setInput] = useState('')
-    const {resultados,novosResultados} = useResultado()
+    const {novosResultados} = useResultado()
 
 
     const apertarBotao = async () => {
@@ -52,7 +52,7 @@ function CampoBusca(){
                 }
             });
             const respostaJson = await resposta.json()
-            console.log(respostaJson)
+            novosResultados(respostaJson)
         }catch(error){
             console.log(`deu erro ${error.message}`)
         }

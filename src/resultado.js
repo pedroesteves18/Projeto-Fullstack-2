@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components'
 import { useResultado } from './ResultadoContext';
 
@@ -11,15 +11,18 @@ const ResultadoStyled = styled.div`
 `
 
 function Resultado(){
-    const resultados = useResultado()
-    return (<ResultadoStyled>
-        <ul>
-            {resultados.map((resultado,index) => {
-                <li key={index}>{resultado}</li>
-            })}
-        </ul>
-    </ResultadoStyled>
-    )
+    const {resultados} = useResultado()
+    if(resultados === undefined){
+        return <div></div>
+    }else {
+        return (<ResultadoStyled>
+                {resultados.map((resultado,index) => {
+                    return <div key={index}>{resultado}</div>
+                    console.log(resultado)
+                })}
+        </ResultadoStyled>
+    )}
+    
 }
 
 

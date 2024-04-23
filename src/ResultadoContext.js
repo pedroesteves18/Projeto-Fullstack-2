@@ -8,15 +8,15 @@ export function useResultado(){
 
 
 export function ResultadoProvider({children}){
-    const [resultados,setResultado] = useState([])
+    const [resultados, setResultado] = useState([]);
     
-    const novosResultados = () => {
-        setResultado(novosResultados)
-    }
+    const novosResultados = (novosResultados) => {
+        setResultado(novosResultados);
+    };
 
-    return(
-        <resultadoContext.Provider value = {{resultados, novosResultados}}>
+    return (
+        <resultadoContext.Provider value={{resultados, novosResultados}}>
             {children}
         </resultadoContext.Provider>
-    )
+    );
 }

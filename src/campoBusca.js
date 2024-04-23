@@ -1,8 +1,9 @@
 import React from 'react';
 import styled from 'styled-components'
-
-
+import {useState} from 'react'
+import { useResultado } from './ResultadoContext';
 import Lupa from './imgs/lupa.png'
+
 
 const CampoStyled = styled.div`
     position: relative;
@@ -37,10 +38,30 @@ const LupaStyled = styled.img`
 
 
 function CampoBusca(){
+
+    const [valorInput,setInput] = useState('')
+    const {resultados,novosResultados} = useResultado()
+
+
+    const apertarBotao = async () => {
+        try{
+            const resposta = await fetch(`https://wft-geo-db.p.rapidapi.com/v1/geo/places?namePrefix=${valorInput}`, {
+                headers: {
+                    "x-rapidapi-host": 'wft-geo-db.p.rapidapi.com',
+                    "x-rapidapi-key": '41fd8fb333mshf25dc5b0353d429p1146c1jsn49b5f408504e'
+                }
+            });
+            const respostaJson = await resposta.json()
+            console.log(respostaJson)
+        }catch(error){
+            console.log(`deu erro ${error.message}`)
+        }
+    }
+
     return(
         <CampoStyled>
-            <InputStyled id="entrada"/>
-            <BtStyled id="botaoBusca">
+            <InputStyled type="text" value={valorInput} onChange={(e) => setInput(e.target.value)}/>
+            <BtStyled onClick={apertarBotao}>
                 <LupaStyled  src={Lupa}/>
             </BtStyled>
         </CampoStyled>

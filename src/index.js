@@ -5,12 +5,12 @@ import './index.css';
 import reportWebVitals from './reportWebVitals';
 import Dados from './dados'
 
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <Dados>
     </Dados>
-
   </React.StrictMode>
 );
 

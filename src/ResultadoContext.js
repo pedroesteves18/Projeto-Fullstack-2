@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useMemo,useContext, useState } from 'react';
 
 const resultadoContext = createContext()
 
@@ -14,8 +14,12 @@ export function ResultadoProvider({children}){
         setResultado(novosResultados);
     };
 
+    const value = useMemo(() => {
+        return { resultados, novosResultados };
+    }, [resultados])
+
     return (
-        <resultadoContext.Provider value={{resultados, novosResultados}}>
+        <resultadoContext.Provider value={value}>
             {children}
         </resultadoContext.Provider>
     );

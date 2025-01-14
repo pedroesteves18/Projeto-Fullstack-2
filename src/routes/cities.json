@@ -1,0 +1,219 @@
+[
+    {
+      "name": "São Paulo",
+      "country": "Brasil",
+      "latitude": -23,
+      "longitude": -46,
+      "population": 12325232
+    },
+    {
+      "name": "New York",
+      "country": "Estados Unidos",
+      "latitude": 40,
+      "longitude": -74,
+      "population": 8419600
+    },
+    {
+      "name": "Tóquio",
+      "country": "Japão",
+      "latitude": 35,
+      "longitude": 139,
+      "population": 37400068
+    },
+    {
+      "name": "Paris",
+      "country": "França",
+      "latitude": 48,
+      "longitude": 2,
+      "population": 2148000
+    },
+    {
+      "name": "Londres",
+      "country": "Reino Unido",
+      "latitude": 51,
+      "longitude": -0.1276,
+      "population": 8982000
+    },
+    {
+      "name": "Berlim",
+      "country": "Alemanha",
+      "latitude": 52,
+      "longitude": 13,
+      "population": 3645000
+    },
+    {
+      "name": "Los Angeles",
+      "country": "Estados Unidos",
+      "latitude": 34,
+      "longitude": -118,
+      "population": 3980400
+    },
+    {
+      "name": "Sydney",
+      "country": "Austrália",
+      "latitude": -33,
+      "longitude": 151,
+      "population": 5230330
+    },
+    {
+      "name": "Toronto",
+      "country": "Canadá",
+      "latitude": 43,
+      "longitude": -79,
+      "population": 2731571
+    },
+    {
+      "name": "Moscou",
+      "country": "Rússia",
+      "latitude": 55,
+      "longitude": 37,
+      "population": 11920000
+    },
+    {
+      "name": "Rio de Janeiro",
+      "country": "Brasil",
+      "latitude": -22,
+      "longitude": -43,
+      "population": 6748000
+    },
+    {
+      "name": "Mumbai",
+      "country": "Índia",
+      "latitude": 19,
+      "longitude": 72,
+      "population": 12442373
+    },
+    {
+      "name": "Pequim",
+      "country": "China",
+      "latitude": 39,
+      "longitude": 116,
+      "population": 21540000
+    },
+    {
+      "name": "Dubai",
+      "country": "Emirados Árabes Unidos",
+      "latitude": 25,
+      "longitude": 55,
+      "population": 3314000
+    },
+    {
+      "name": "Buenos Aires",
+      "country": "Argentina",
+      "latitude": -34,
+      "longitude": -58,
+      "population": 2890151
+    },
+    {
+      "name": "Cidade do México",
+      "country": "México",
+      "latitude": 19,
+      "longitude": -99,
+      "population": 8918653
+    },
+    {
+        "name": "Bangkok",
+        "country": "Tailândia",
+        "latitude": 13,
+        "longitude": 100,
+        "population": 8300000
+      },
+      {
+        "name": "Cairo",
+        "country": "Egito",
+        "latitude": 30,
+        "longitude": 31,
+        "population": 20000000
+      },
+      {
+        "name": "Lagos",
+        "country": "Nigéria",
+        "latitude": 6,
+        "longitude": 3,
+        "population": 9230000
+      },
+      {
+        "name": "Karachi",
+        "country": "Paquistão",
+        "latitude": 24,
+        "longitude": 67,
+        "population": 15700000
+      },
+      {
+        "name": "São Petersburgo",
+        "country": "Rússia",
+        "latitude": 59,
+        "longitude": 30,
+        "population": 5351935
+      },
+      {
+        "name": "Iémen",
+        "country": "Iémen",
+        "latitude": 15,
+        "longitude": 44,
+        "population": 2800000
+      },
+      {
+        "name": "Jakarta",
+        "country": "Indonésia",
+        "latitude": -6,
+        "longitude": 106,
+        "population": 10100000
+      },
+      {
+        "name": "Hong Kong",
+        "country": "China",
+        "latitude": 22,
+        "longitude": 114,
+        "population": 7496981
+      },
+      {
+        "name": "Lima",
+        "country": "Peru",
+        "latitude": -12,
+        "longitude": -77,
+        "population": 9130000
+      },
+      {
+        "name": "Rio de Janeiro",
+        "country": "Brasil",
+        "latitude": -22,
+        "longitude": -43,
+        "population": 6748000
+      },
+      {
+        "name": "Santiago",
+        "country": "Chile",
+        "latitude": -33,
+        "longitude": -70,
+        "population": 6340000
+      },
+      {
+        "name": "São Paulo",
+        "country": "Brasil",
+        "latitude": -23,
+        "longitude": -46,
+        "population": 12325232
+      },
+      {
+        "name": "Teerã",
+        "country": "Irã",
+        "latitude": 35,
+        "longitude": 51,
+        "population": 8555000
+      },
+      {
+        "name": "Kuala Lumpur",
+        "country": "Malásia",
+        "latitude": 3,
+        "longitude": 101,
+        "population": 1768000
+      },
+      {
+        "name": "Madrid",
+        "country": "Espanha",
+        "latitude": 40,
+        "longitude": -3,
+        "population": 3223334
+      }
+  ]

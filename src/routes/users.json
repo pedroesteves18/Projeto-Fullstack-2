@@ -1,0 +1,22 @@
+[
+    {
+      "email": "joao.silva123@email.com",
+      "password": "senha123!"
+    },
+    {
+      "email": "maria.oliveira456@email.com",
+      "password": "senha456@"
+    },
+    {
+      "email": "pedro.souza789@email.com",
+      "password": "senha789#"
+    },
+    {
+      "email": "ana.costa234@email.com",
+      "password": "senha234$"
+    },
+    {
+      "email": "lucas.pereira567@email.com",
+      "password": "senha567%"
+    }
+  ]

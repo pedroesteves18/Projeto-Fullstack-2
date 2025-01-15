@@ -1,6 +1,6 @@
 
-import UserBuilder from "../models/User/UserBuilder";
-import User from "../models/User";
+import UserBuilder from "../models/User/UserBuilder.js";
+import User from "../models/User.js";
 import bcrypt from 'bcrypt'
 
 export default {
@@ -13,24 +13,34 @@ export default {
             for(const user of users){
                 result = await bcrypt.compare(password, user.password)
                 if(result) {
-                    break
+                    return {status: 400, msg: 'Credentials have already been used!'}
                 }
             }
-            result = await User.findOne({where: {id:id}})
+            result = await User.findOne({where: {email:email}})
             if(result){
                 return {status: 400, msg: 'Credentials have already been used!'}
             }
             return null
         }
     },
-    createUser: async function (email,password) {
+    createUser: async function (email,password,admin) {
         let builder = new UserBuilder()
-        builder.setEmail(email).setPassword(password).build();
-        let CreatedUser = await User.create({email:email,password:password})
+        await builder.setEmail(email).setPassword(password)
+        let user = builder.build()
+
+        let CreatedUser = await User.create({email:user.email,password:user.password,admin:admin})
         if(CreatedUser){
             return {status:200, msg:'User created!'}
         } else {
             return { status:400, msg:'User not created!' }
+        }
+    },
+    listUsers: async function(){
+        let Users = await User.findAll()
+        if(Users){
+            return {status:200, msg:'Users listed!', users: Users}
+        } else {
+            return {status:400, msg:'An error ocurred!'}
         }
     }
 }

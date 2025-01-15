@@ -6,6 +6,8 @@ import City from './src/models/City.js'
 import database from './src/config/database.js'
 import instalation from './src/routes/instalation.js'
 import login from './src/routes/login.js'
+import users from './src/routes/users.js'
+
 dotenv.config();
 import session from 'express-session';
 const app = express()
@@ -25,7 +27,7 @@ app.use(express.urlencoded({ extended: true }))
 
 app.use('/instalation', instalation)
 app.use('/login', login)
-
+app.use('/users', users)
 app.get('/', (req,res) => {
     res.status(200).send({msg: 'OK!'})
 })

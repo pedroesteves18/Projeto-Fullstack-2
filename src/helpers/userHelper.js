@@ -42,5 +42,14 @@ export default {
         } else {
             return {status:400, msg:'An error ocurred!'}
         }
+    },
+    listUser: async function(id){
+        let user = await User.findOne({where: {id:id}})
+        if(user){
+            user.password = '******'
+            return {status:200, msg:'User listed!', user: user}
+        } else {
+            return {status:400, msg:'An error ocurred!'}
+        }
     }
 }

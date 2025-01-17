@@ -28,8 +28,23 @@ router.get('/', middlewares.verifyAdmin,async (req,res) => {
     }catch(err){
         return res.status(400).send({error:err.message})
     }
+})
 
-
+router.get('/:id', middlewares.verifyToken,async (req,res) => {
+    try{
+        if(req.admin === true){
+            let user = await userHelper.listUser(parseInt(req.params.id))
+            return res.status(user.status).send({msg: user.msg, user: user.user})
+        } 
+    
+        let user = await userHelper.listUser(req.userId)
+        if(parseInt(req.params.id) === parseInt(req.userId)){
+            return res.status(200).send({user: user.user})
+        }
+        return res.status(300).send({msg:"User can list only it's own data", user: user.user})
+    }catch(err){
+        return res.status(400).send({error: err.message})
+    }
 })
 
 export default router

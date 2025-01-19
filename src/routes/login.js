@@ -22,7 +22,6 @@ router.post('/', async (req,res) => {
         }
         return res.status(500).send({msg: 'Error creating token'})
     } catch(err){
-        console.log('adwadwad')
         res.status(400).send({error: err.message})
     }
 })

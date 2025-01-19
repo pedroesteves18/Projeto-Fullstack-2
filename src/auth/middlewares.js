@@ -38,6 +38,7 @@ async function verifyAdmin(req,res,next){
     try{
         await verifyToken(req,res, () => {
             if (req.admin != true) {
+                console.log('User tried to do a Admin privilege required action')
                 return res.status(403).send({ msg: 'Admin privileges required' });
             }
             next()
@@ -48,5 +49,35 @@ async function verifyAdmin(req,res,next){
     }
 }
 
+async function admCreationToken(req,res,next){
+    try{
+        const token = req.session.token
+        if(!token){
+            req.admin = false
+            if(req.body.admin === "true"){
+                console.log("User not authenticated trie to create a ADMIN user")
+            }
+            next()
+        }
+        if(token){
+            jwt.verify(token,process.env.SECRET_KEY, (err,decoded) => {
+                if(err){
+                    return res.status(401).send({msg:'Token invalid!'})
+                }
 
-export default {verifyToken,verifyAdmin,createToken}
+                req.userId = decoded.id
+                req.admin = decoded.admin
+                if(req.admin != true){
+                    console.log('User tried to do a Admin privilege required action')
+                    return res.status(403).send({ msg: 'Admin privileges required' });
+                }
+                next()
+            })
+        }
+    }catch(err){
+        return res.status(404).send({err: err.message})
+    }
+}
+
+
+export default {verifyToken,verifyAdmin,createToken,admCreationToken}

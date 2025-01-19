@@ -2,6 +2,7 @@
 import City from "../models/City.js"
 import CityBuilder from "../models/City/CityBuilder.js"
 import cache from '../config/cache.js'
+import sanitizer from "../auth/sanitizer.js"
 
 export default {
     listCities: async function(){
@@ -21,11 +22,16 @@ export default {
             if(!name || name.length < 3){
                 return {status: 400, msg: 'The amount of characters must be greater than 3!'}
             }else {
-                cache.get(`city_cache_${name}`, async (err, cityCache) => {
-                    if(cityCache) {
-                        return {status: 200, msg: JSON.parse(cityCache)}
+                let cities = cache.get('cities_cache')
+                let reqCities = []
+                for(const city of cities){
+                    if(city.name.includes(name)){
+                        reqCities.push(city)
                     }
-                })
+                }
+                if(reqCities.length > 0){
+                    return {status:200,msg:reqCities}
+                }
                 return {status:300,msg:'Cities with this name or characters were not found!'}
             }
 
@@ -50,6 +56,7 @@ export default {
     },
     creatCity: async function(city){
         try{
+
             let builder = new CityBuilder()
             let cityBuilded = builder.setCountry(city.country).setLatitude(city.latitude).setLongitude(city.longitude).setName(city.name).setPopulation(city.population).build()
             let CreatedCity = await City.create(cityBuilded)

@@ -1,15 +1,18 @@
 
 import City from "../models/City.js"
 import CityBuilder from "../models/City/CityBuilder.js"
-import {Op} from 'sequelize'
+import cache from '../config/cache.js'
 
 export default {
     listCities: async function(){
         try{
-            let cities = await City.findAll()
-            return {cities:cities,status:300,msg:'Cities listed'}
+            let cities = cache.get('cities_cache');
+            if(cities){
+                return {status: 200, cities:cities}
+            }
+            return {status:300,msg:'No cities are cadastred!'}
         }catch(err){
-            return {status:500,msg:'An error ocurred'}
+            return {status:500,msg:'An error ocurred' + err}
         }
         
     },
@@ -18,21 +21,12 @@ export default {
             if(!name || name.length < 3){
                 return {status: 400, msg: 'The amount of characters must be greater than 3!'}
             }else {
-                let cities = await City.findAll({
-                                                    where:{
-                                                        name: {
-                                                                [Op.like]:`${name}%`
-                                                        }
-                                                    },
-                                                    order: [['population','DESC']]
-                                                })
-                if(cities.length > 0){
-                    console.log(cities)
-                    return {status: 200, msg: cities}
-                } else {
-                    return {status: 300, msg:'Cities with this name or characters were not found!'}
-                }
-                
+                cache.get(`city_cache_${name}`, async (err, cityCache) => {
+                    if(cityCache) {
+                        return {status: 200, msg: JSON.parse(cityCache)}
+                    }
+                })
+                return {status:300,msg:'Cities with this name or characters were not found!'}
             }
 
 
@@ -60,6 +54,10 @@ export default {
             let cityBuilded = builder.setCountry(city.country).setLatitude(city.latitude).setLongitude(city.longitude).setName(city.name).setPopulation(city.population).build()
             let CreatedCity = await City.create(cityBuilded)
             if(CreatedCity != null){
+                cache.del('cities_cache');
+                let Cities = await City.findAll()
+                Cities = Cities.map(city => city.toJSON())
+                cache.set('cities_cache',Cities)
                 return {status: 200, msg: 'City inserted!: '}
             }
 
@@ -77,6 +75,10 @@ export default {
 
             let removedCity = await City.destroy({where: {id:id}})
             if(removedCity){
+                cache.del('cities_cache');
+                let Cities = await City.findAll()
+                Cities = Cities.map(city => city.toJSON())
+                cache.set('cities_cache',Cities)
                 return {status:200, msg:'The city was removed'}
             } else {
                 return {status:300, msg:'ID informed is not registered'}

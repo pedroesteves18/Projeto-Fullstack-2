@@ -1,14 +1,15 @@
 import bcrypt from 'bcrypt'
 import dotenv from 'dotenv';
 dotenv.config();
-
+import City from '../models/City.js'
+import User from '../models/User.js'
+import cache from '../config/cache.js';
 export default {
 
     cont: 0,
 
-    insertCities: async function(cities,database,City) {
+    insertCities: async function(cities) {
         try{
-            await database.sync()
             const CreatedCities = await City.bulkCreate(cities.map(city => ({
                 name: city.name,
                 country: city.country,
@@ -17,15 +18,21 @@ export default {
                 population: city.population
             })))
 
+
+            cache.del('cities_cache');
+            let allCities = await City.findAll();
+            allCities = allCities.map(city => city.toJSON())
+            cache.set('cities_cache', allCities);
+
+
             this.cont = 1
             console.log('Cities inserted!')
         }catch(err){
             console.log('Error in syncing: ', err)
         }
     },
-    insertUsers: async function(users,database,User){
+    insertUsers: async function(users){
         try{
-            await database.sync()
             const CreatedUsers = await User.bulkCreate(await Promise.all (users.map(async (user) => {
                 const crypt = await bcrypt.hash(user.password, parseInt(process.env.ROUNDS))
                 return {
@@ -40,6 +47,12 @@ export default {
                 admin: true
             })
             this.cont = 1
+
+            cache.del('users_cache');
+            let allUsers = await User.findAll();
+            allUsers = allUsers.map(user => user.toJSON())
+            cache.set('users_cache', allUsers);
+
             console.log('Users inserted!')
         }catch(err){
             console.log('Error in syncing: ', err)

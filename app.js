@@ -8,16 +8,23 @@ import instalation from './src/routes/instalation.js'
 import login from './src/routes/login.js'
 import users from './src/routes/users.js'
 import cities from './src/routes/cities.js'
-
-
 dotenv.config();
-import session from 'express-session';
+import session from 'express-session'
+
+
+
 const app = express()
+
+
 app.use(session({
     secret: process.env.SECRET_KEY,
     resave: false,
     saveUninitialized: true,
-    cookie: {secure: false}
+    cookie: {
+        secure: false,
+        httpOnly: true,
+        maxAge: 3600000
+    }
 }))
 
 

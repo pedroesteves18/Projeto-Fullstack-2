@@ -2,6 +2,8 @@
 import UserBuilder from "../models/User/UserBuilder.js";
 import User from "../models/User.js";
 import bcrypt from 'bcrypt'
+import cache from '../config/cache.js'
+
 
 export default {
     verifyCredentials: async function(email,password){
@@ -30,13 +32,19 @@ export default {
 
         let CreatedUser = await User.create({email:user.email,password:user.password,admin:admin})
         if(CreatedUser){
+            cache.del('users_cache')
+            let Users = await User.findAll()
+            Users = Users.map(user => user.toJSON())
+            cache.set('users_cache',Users)
+
+
             return {status:200, msg:'User created!'}
         } else {
             return { status:400, msg:'User not created!' }
         }
     },
     listUsers: async function(){
-        let Users = await User.findAll()
+        let Users = cache.get('users_cache')
         if(Users){
             return {status:200, msg:'Users listed!', users: Users}
         } else {

@@ -6,7 +6,8 @@ const Authenticator = ({ children }) => {
   const [currentUser, setCurrentUser] = useState();
 
   const logout = () => {
-    setCurrentUser(undefined)
+    setCurrentUser(undefined);
+    localStorage.setItem("Auth", "undefined");
   }
 
   return (

@@ -22,8 +22,6 @@ const LoginPage = () => {
   const handleSubmit = async (evt) => {
     evt.preventDefault();
 
-    debugger;
-
     try {
       const requestBody = {
         email: emailField,
@@ -41,6 +39,7 @@ const LoginPage = () => {
       if (response.status == 200) {
         const userData = await response.json();
         Auth.setCurrentUser(userData);
+        localStorage.setItem("Auth", JSON.stringify(userData));
         navigate("/");
       }
     } catch (error) {
@@ -81,7 +80,7 @@ const LoginPage = () => {
           </form>
         </div>
         <div className="col"></div>
-        </div>
+      </div>
     </div>
   );
 }

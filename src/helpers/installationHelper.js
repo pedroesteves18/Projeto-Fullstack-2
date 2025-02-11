@@ -38,15 +38,7 @@ export default {
                     password: crypt.toString()
                 }
             })))
-
-            const AdminPassword = "senhaAdmin1"
-            const crypt = await bcrypt.hash(AdminPassword, parseInt(process.env.ROUNDS))
-            const AdmCreated = await User.create({
-                email: 'admin@admin.com',
-                password: crypt.toString(),
-                admin: true
-            })
-            
+ 
             this.cont = 1
 
             cache.del('users_cache');

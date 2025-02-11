@@ -8,7 +8,8 @@ import users from './src/routes/users.js'
 import cities from './src/routes/cities.js'
 import database from './src/config/database.js'
 import installation from './src/routes/installation.js'
-
+import bcrypt from 'bcrypt'
+import User from './src/models/User.js'
 dotenv.config()
 
 const app = express()
@@ -38,7 +39,14 @@ app.get('/api', (req, res) => {
     res.status(200).send({ msg: 'OK!' })
 })
 
-app.listen(port, () => {
+app.listen(port, async () => {
+    const AdminPassword = "senhaAdmin1"
+    const crypt = await bcrypt.hash(AdminPassword, parseInt(process.env.ROUNDS))
+    const AdmCreated = await User.create({
+        email: 'admin@admin.com',
+        password: crypt.toString(),
+        admin: true
+    })
     console.log("Application running on port " + port)
 })
 
